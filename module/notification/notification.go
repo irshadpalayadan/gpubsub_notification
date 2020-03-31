@@ -1,6 +1,11 @@
 package notification
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+	gpubsub "github.com/irshadpalayadan/gpubsub_notification/module/pubsub"
+)
 
 type Notify struct {
 	id      string
@@ -16,6 +21,9 @@ func InitializeNotification() {
 }
 
 func GetNotificationForUserId(ctx *gin.Context) {
+
+	td := gpubsub.SubscribePull("gpubsub-272721", "signup_notify")
+	fmt.Print(td)
 
 	userId := ctx.Param("userid")
 	if userId == "" {
